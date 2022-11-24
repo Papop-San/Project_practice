@@ -7,6 +7,7 @@ from timezonefinder import TimezoneFinder
 from datetime import * 
 import requests
 import pytz
+import decimal  
 #ทำงานกับรูปภาพ
 from PIL import Image , ImageTk
 
@@ -19,7 +20,7 @@ root.geometry("890x470+300+300")
 root.configure(bg='#57adff')
 # root.resizable(False,False)
 
-# time vedio is 30.00
+# Function 
 def getWheater():
     city = textfield.get()
 
@@ -48,17 +49,55 @@ def getWheater():
     print(json_data)
     #current 
     temping = json_data['main']['temp'] #Kelvin
-    temp =  temping - 273.15
+    temp =  decimal.Decimal(temping - 273.15) #change become Celcius 
     humidity = json_data['main']['humidity'] # right
     pressure = json_data['main']['pressure'] # right 
     wind = json_data['wind']['speed'] #right 
+    description = json_data['weather'][0]['description'] #You have to add index into description
     
 
-    print(temp)
-    print(humidity)
-    print(pressure)
-    print(wind)
-    # print(description)
+  
+
+    #after we set the place for show  we will add text in box 
+    t.config(text=(round(temp),"°C"))
+    h.config(text=(humidity,'%'))
+    p.config(text=(pressure,'hPa'))
+    w.config(text=(wind,'m/s'))
+    d.config(text=description)
+
+    #first cell
+    #second cell 
+    #thrid cell 
+    #fourth cell
+    #fifth cell 
+    #fifth cell 
+    #sixth cell 
+    #seventh cell
+
+    #days 
+    first =  datetime.now()
+    day1.config(text=first.strftime('%A'))
+
+    #ทำการ + วันเพิ่ม
+    second =  first+timedelta(days=1)
+    day2.config(text=second.strftime('%A'))
+
+    third = first + timedelta(days=2)
+    day3.config(text=third.strftime('%A'))
+
+    fourth = first + timedelta(days=3)
+    day4.config(text=fourth.strftime('%A'))
+    
+    fifth = first + timedelta(days=4)
+    day5.config(text=fifth.strftime('%A'))
+    
+    sixth = first + timedelta(days=5)
+    day6.config(text=sixth.strftime('%A'))
+
+    seventh = first + timedelta(days=6)
+    day7.config(text=seventh.strftime('%A'))
+
+
 
 # All Function#
 
@@ -66,7 +105,7 @@ image_icon = PhotoImage(file="Project_weather/Images/logo.png")
 root.iconphoto(False,image_icon)
 
 Round_box = PhotoImage(file='Project_weather/Images/Rounded_Rectangle_1.png')
-Label(root,image=Round_box,bg='#57adff').place(x=30,y=110)
+Label(root,image=Round_box,bg='#57adff').place(x=45,y=110)
 
 
 
@@ -140,6 +179,77 @@ timezoner.place(x=600,y=20)
 long_lati = Label(root,font =('Helvetica',10,'bold'),fg='white',bg='#57adff')
 long_lati.place(x=600,y=50)
 #comeback to search_icon for  add Commnad 
+
+
+
+#Setting in right box
+t = Label(root,font=('Helvetica',11),fg = 'White',bg = '#203243')
+t.place(x=150,y=120)
+
+h = Label(root,font=('Helvetica',11),fg = 'White',bg = '#203243')
+h.place(x=150,y=140)
+
+p = Label(root,font=('Helvetica',10),fg = 'White',bg = '#203243')
+p.place(x=150,y=160)
+
+w = Label(root,font=('Helvetica',10),fg = 'White',bg = '#203243')
+w.place(x=150,y=180)
+
+d = Label(root,font=('Helvetica',8),fg = 'White',bg = '#203243')
+d.place(x=150,y=200)
+
+
+#all cell footer 
+ 
+#first cell 
+first_frame = Frame(root,width=230,height=132,bg='#282829')
+first_frame.place(x=35,y=315)
+
+day1 = Label(first_frame,font='arial 20',bg='#282829',fg='#fff')
+day1.place(x=100,y=5)
+
+#second cell 
+second_frame = Frame(root,width=70,height=115,bg='#282829')
+second_frame.place(x=305,y=325)
+
+day2 = Label(second_frame,font='arial 10',bg='#282829',fg='#fff')
+day2.place(x=10,y=5)
+
+#third cell
+third_frame = Frame(root,width=70,height=115,bg='#282829')
+third_frame.place(x=405,y=325)
+
+day3 = Label(third_frame,font='arial 10',bg='#282829',fg='#fff')
+day3.place(x=10,y=5)
+
+#fourth cell
+fourth_frame = Frame(root,width=70,height=115,bg='#282829')
+fourth_frame.place(x=505,y=325)
+
+day4 = Label(fourth_frame,bg='#282829',fg='#fff')
+day4.place(x=10,y=5)
+
+#fifth cell
+fifth_frame = Frame(root,width=70,height=115,bg='#282829')
+fifth_frame.place(x=605,y=325)
+
+day5 = Label(fifth_frame,bg='#282829',fg='#fff')
+day5.place(x=10,y=5)
+
+#sixth cell 
+sixth_frame = Frame(root,width=70,height=115,bg='#282829')
+sixth_frame.place(x=705,y=325)
+
+day6 = Label(sixth_frame ,font='arial 8',bg='#282829',fg='#fff')
+day6.place(x=8,y=5)
+
+# seventh cell 
+seventh_frame = Frame(root,width=70,height=115,bg='#282829')
+seventh_frame.place(x=805,y=325)
+
+day7 = Label(seventh_frame,font='arial 8' ,bg='#282829',fg='#fff')
+day7.place(x=5,y=5)
+
 
 
 
