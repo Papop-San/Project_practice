@@ -41,12 +41,15 @@ def getWheater():
 
     #weather 
     #chnage vertion 2.5 from 3
-    # api = "https://api.openweathermap.org/data/2.5/onecall?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&units=metric&exclude=hourly&appid=58ff00cbbcd2d6ac95efbf904a477300"
+    # api = "https://api.openweathermap.org/data/3.0/onecall?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&exclude=hourly&appid=58ff00cbbcd2d6ac95efbf904a477300"
     api = "https://api.openweathermap.org/data/2.5/weather?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&appid=58ff00cbbcd2d6ac95efbf904a477300"
     
   
     json_data = requests.get(api).json()
     print(json_data)
+
+
+
     #current 
     temping = json_data['main']['temp'] #Kelvin
     temp =  decimal.Decimal(temping - 273.15) #change become Celcius 
@@ -66,13 +69,50 @@ def getWheater():
     d.config(text=description)
 
     #first cell
+    firstdayimage = json_data['weather'][0]['icon']
+    print(firstdayimage)
+
+    photo1 = ImageTk.PhotoImage(file =f"Project_weather/icon/{firstdayimage}@2x.png")
+    firstimage.config(image=photo1)
+    firstimage.image_names = photo1
+
+    tempday1 = json_data['temp']['day']
+
+    # They have problem with the api vertion  {'cod': 401, 'message': 'Please note that using One Call 3.0 requires a separate subscript
+
     #second cell 
-    #thrid cell 
+    seconddayimage = json_data['weather'][0]['icon']
+    print(seconddayimage)
+
+    # photo2 = ImageTk.PhotoImage(file =f"Project_weather/icon/{seconddayimage}@2x.png")
+    # resize_imgae = resize_imgae(50,50)
+    # secondimge.config(image=photo2)
+    # secondimge.image_names = photo2
+    
+    #thrid cell
+    thirddayimage = json_data['weather'][0]['icon']
+    print(thirddayimage)
+ 
     #fourth cell
+
+    fourthdayimg = json_data['weather'][0]['icon']
+    print(fourthdayimg)
+
     #fifth cell 
-    #fifth cell 
-    #sixth cell 
+
+    fifthdayimge = json_data['weather'][0]['icon']
+    print(fifthdayimge)
+
+    #sixth cell
+
+    sixthdayimage = json_data['weather'][0]['icon']
+    print(sixthdayimage)
+
     #seventh cell
+
+    seventhdayimage = json_data['weather'][0]['icon']
+    print(seventhdayimage)
+
 
     #days 
     first =  datetime.now()
@@ -208,12 +248,27 @@ first_frame.place(x=35,y=315)
 day1 = Label(first_frame,font='arial 20',bg='#282829',fg='#fff')
 day1.place(x=100,y=5)
 
+firstimage = Label(first_frame,bg='#282829')
+firstimage.place(x=1,y=15)
+
+
+day1temp = Label(first_frame,bg='#282829',fg='#fff')
+day1temp.place(x=100, y=50)
+
+
+
+
 #second cell 
 second_frame = Frame(root,width=70,height=115,bg='#282829')
 second_frame.place(x=305,y=325)
 
 day2 = Label(second_frame,font='arial 10',bg='#282829',fg='#fff')
 day2.place(x=10,y=5)
+
+
+secondimge = Label(second_frame,bg='#282829')
+secondimge.place(x=7,y=20)
+
 
 #third cell
 third_frame = Frame(root,width=70,height=115,bg='#282829')
@@ -222,12 +277,20 @@ third_frame.place(x=405,y=325)
 day3 = Label(third_frame,font='arial 10',bg='#282829',fg='#fff')
 day3.place(x=10,y=5)
 
+
+thirdimge = Label(third_frame,bg='#282829')
+thirdimge.place(x=7,y=20)
+
 #fourth cell
 fourth_frame = Frame(root,width=70,height=115,bg='#282829')
 fourth_frame.place(x=505,y=325)
 
 day4 = Label(fourth_frame,bg='#282829',fg='#fff')
 day4.place(x=10,y=5)
+
+fourthimge = Label(fourth_frame,bg='#282829')
+fourthimge.place(x=7,y=20)
+
 
 #fifth cell
 fifth_frame = Frame(root,width=70,height=115,bg='#282829')
@@ -236,6 +299,10 @@ fifth_frame.place(x=605,y=325)
 day5 = Label(fifth_frame,bg='#282829',fg='#fff')
 day5.place(x=10,y=5)
 
+fifthimge = Label(fifth_frame,bg='#282829')
+fifthimge.place(x=7,y=20)
+
+
 #sixth cell 
 sixth_frame = Frame(root,width=70,height=115,bg='#282829')
 sixth_frame.place(x=705,y=325)
@@ -243,12 +310,19 @@ sixth_frame.place(x=705,y=325)
 day6 = Label(sixth_frame ,font='arial 8',bg='#282829',fg='#fff')
 day6.place(x=8,y=5)
 
+sixthimge = Label(sixth_frame,bg='#282829')
+sixthimge.place(x=7,y=20)
+
+
 # seventh cell 
 seventh_frame = Frame(root,width=70,height=115,bg='#282829')
 seventh_frame.place(x=805,y=325)
 
 day7 = Label(seventh_frame,font='arial 8' ,bg='#282829',fg='#fff')
 day7.place(x=5,y=5)
+
+seventhimage = Label(seventh_frame,bg='#282829')
+seventhimage.place(x=7,y=20)
 
 
 
